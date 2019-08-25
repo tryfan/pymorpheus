@@ -90,9 +90,10 @@ class MorpheusClient:
     def get_token(self):
         return self.token
 
-    def _send_call(self, method, **kwargs):
-        print('Calling method: %r to %r' % (method, kwargs))
+    def _send_call(self, method, path, **kwargs):
+        print('Calling method: %r to %r with %r' % (method, path, kwargs))
 
+        url = ""
         method = method.lower()
 
         if method not in dir(requests.api):
@@ -100,10 +101,8 @@ class MorpheusClient:
             raise MethodTypeError
 
         try:
-            if kwargs['path'].startswith("/"):
-                path = kwargs['path']
-            else:
-                path = "/" + kwargs['path']
+            if not path.startswith("/"):
+                path = "/" + path
 
             options = ""
 
@@ -143,10 +142,13 @@ class MorpheusClient:
             print("Requests: Something went wrong: ", err)
             print(url)
 
-    def call(self, method, **kwargs):
+    def call(self, method, path, **kwargs):
         """
-        Calls a function
-        :str method: get, post, put, delete
+        Calls an API path
+        :str method: URL request method
+        :str path: API path
+        :mixed kwargs: options, json payload
+        :return: JSON result
         """
-        result = self._send_call(method, **kwargs)
+        result = self._send_call(method, path, **kwargs)
         return result
