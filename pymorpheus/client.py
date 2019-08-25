@@ -2,9 +2,9 @@
 Python module for interacting with the Morpheus API
 
 Example:
-    pip install pymorpheus
-    from pymorpheus import Morpheus
-    morpheus = Morpheus()
+    pip install git+https://github.com/ncelebic/pymorpheus.git
+    from pymorpheus import MorpheusClient
+    morpheus = MorpheusClient("https://yoururl", username="youruser", password="yourpass")
 """
 
 import requests
