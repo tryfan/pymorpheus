@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pymorpheus',
-    version='0.1',
+    version='0.1.1',
     description='Morpheus API wrapper for Python 3',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -20,8 +20,6 @@ setuptools.setup(
     ],
     install_requires=[
         'requests',
-        'urllib3',
-        'json',
-        'logging'
+        'urllib3'
     ]
 )

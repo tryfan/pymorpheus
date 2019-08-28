@@ -2,7 +2,7 @@
 
 ## Installation
 
-`pip install git+https://github.com/ncelebic/pymorpheus.git`
+`pip install pymorpheus`
 
 ## Usage
 
