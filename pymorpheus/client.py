@@ -108,7 +108,7 @@ class MorpheusClient:
 
             if "options" in kwargs:
                 for tup in kwargs['options']:
-                    options += tup[0] + "=" + tup[1]
+                    options += tup[0] + "=" + tup[1] + "&"
 
             json_string = ""
 
