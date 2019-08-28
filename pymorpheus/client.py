@@ -126,7 +126,7 @@ class MorpheusClient:
             r = getattr(requests, method)(url,
                                           headers=self.headers,
                                           verify=self.sslverify,
-                                          data=json_string)
+                                          json=json_string)
             return r.json()
 
         except requests.ConnectionError as cerr:
