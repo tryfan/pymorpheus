@@ -1,10 +1,12 @@
 # Morpheus Python Module
 
+[![Documentation Status](https://readthedocs.org/projects/pymorpheus/badge/?version=latest)](https://pymorpheus.readthedocs.io/en/latest/?badge=latest)
+
 ## Installation
 
 `pip install pymorpheus`
 
-## Usage
+## Usage 
 
 MorpheusClient() will either retrieve a token (with username and password args), or use an existing token (with token arg)
 Use `sslverify=False` to bypass certificate validation.
