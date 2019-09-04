@@ -1,10 +1,6 @@
 """
 Python module for interacting with the Morpheus API
 
-Example:
-    pip install git+https://github.com/ncelebic/pymorpheus.git
-    from pymorpheus import MorpheusClient
-    morpheus = MorpheusClient("https://yoururl", username="youruser", password="yourpass")
 """
 
 import requests
@@ -22,23 +18,25 @@ class MorpheusClientException(Exception):
 
 
 class MethodTypeError(MorpheusClientException):
+    """ Exception for bad HTTP request type """
     pass
 
 
 class MorpheusClient:
-    """
-    The main Morpheus class
-    """
 
-    # Statics
-    morpheus_url = ""
-    morpheus_api = ""
-    headers = {}
-    token = ""
-    sslverify = True
-
-    # def __init__(self, morpheus_url, username="", password="", token="", client_id="morph-cli"):
     def __init__(self, morpheus_url, **kwargs):
+        """
+        The main Morpheus class
+
+        :param morpheus_url: Morpheus URL
+        :type morpheus_url: str
+        :key username: Morpheus username
+        :key password: Morpheus password
+        :key token: Morpheus token
+        :key client_id: Morpheus client_id, defaults to 'morph-cli'
+        :return: __init__ should return None
+        :rtype: None
+        """
 
         # Required args
         self.morpheus_url = morpheus_url
@@ -90,6 +88,12 @@ class MorpheusClient:
                             "Content-Type": "application/json"}
 
     def get_token(self):
+        """
+        Return API token
+
+        :return: API Token
+        :rtype: str
+        """
         return self.token
 
     def _send_call(self, method, path, **kwargs):
@@ -147,10 +151,16 @@ class MorpheusClient:
     def call(self, method, path, **kwargs):
         """
         Calls an API path
-        :str method: URL request method
-        :str path: API path
-        :mixed kwargs: options, json payload
+
+        :param method: URL request method
+        :type method: str
+        :param path: API path
+        :type path: str
+        :key options: Key, value options
+        :key jsonpayload: JSON data payload
         :return: JSON result
+        :rtype: dict
         """
+
         result = self._send_call(method, path, **kwargs)
         return result
