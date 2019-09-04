@@ -1,5 +1,7 @@
 # Morpheus Python Module
 
+[![Documentation Status](https://readthedocs.org/projects/pymorpheus/badge/?version=latest)](https://pymorpheus.readthedocs.io/en/latest/?badge=latest)
+
 ## Installation
 
 `pip install pymorpheus`
