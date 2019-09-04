@@ -8,9 +8,9 @@ import urllib3
 import logging
 import json
 
-logger = logging.getLogger(__name__)
+name = "pymorpheus"
 
-name = "MorpheusClient"
+logger = logging.getLogger(__name__)
 
 
 class MorpheusClientException(Exception):
@@ -97,13 +97,13 @@ class MorpheusClient:
         return self.token
 
     def _send_call(self, method, path, **kwargs):
-        print('Calling method: %r to %r with %r' % (method, path, kwargs))
+        logger.debug('Calling method: %r to %r with %r' % (method, path, kwargs))
 
         url = ""
         method = method.lower()
 
         if method not in dir(requests.api):
-            print("bad method type: %s" % method)
+            logger.error("bad method type: %s" % method)
             raise MethodTypeError
 
         try:
@@ -122,12 +122,12 @@ class MorpheusClient:
                 try:
                     json_string = json.loads(kwargs['jsonpayload'])
                 except ValueError as e:
-                    print("Invalid JSON string passed:")
-                    print(kwargs['jsonpayload'])
-                    print(e)
+                    logger.error("Invalid JSON string passed:")
+                    logger.error(kwargs['jsonpayload'])
+                    logger.error(e)
 
             url = self.morpheus_api + path + "?" + options
-            print(url)
+            logger.debug(url)
 
             r = getattr(requests, method)(url,
                                           headers=self.headers,
@@ -136,17 +136,17 @@ class MorpheusClient:
             return r.json()
 
         except requests.ConnectionError as cerr:
-            print("Connection Error: ", cerr)
-            print(url)
+            logger.error("Connection Error: ", cerr)
+            logger.error(url)
         except requests.HTTPError as herr:
-            print("Bad status code returned: ", herr)
-            print(url)
+            logger.error("Bad status code returned: ", herr)
+            logger.error(url)
         except requests.Timeout as terr:
-            print("Timeout: ", terr)
-            print(url)
+            logger.error("Timeout: ", terr)
+            logger.error(url)
         except requests.exceptions.RequestException as err:
-            print("Requests: Something went wrong: ", err)
-            print(url)
+            logger.error("Requests: Something went wrong: ", err)
+            logger.error(url)
 
     def call(self, method, path, **kwargs):
         """
