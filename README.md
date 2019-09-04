@@ -24,7 +24,7 @@ Reference at https://bertramdev.github.io/morpheus-apidoc
 ```
 from pymorpheus import MorpheusClient
 morpheus = MorpheusClient("https://yoururl", username="youruser", password="yourpass")
-results = morpheus.call("get", path="instances")
+results = morpheus.call("get", "instances")
 print(results)
 # JSON Output of results
 ```
