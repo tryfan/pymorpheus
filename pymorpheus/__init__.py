@@ -133,6 +133,11 @@ class MorpheusClient:
                                           headers=self.headers,
                                           verify=self.sslverify,
                                           json=json_string)
+            
+            if r.status_code != 200:
+                print(r.text)
+                raise requests.HTTPError(r)
+
             return r.json()
 
         except requests.ConnectionError as cerr:
